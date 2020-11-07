@@ -2,9 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
-
 START_DATE = 1824
 END_DATE = 2016
+
 
 def getData(year):
     r = requests.get("https://en.wikipedia.org/wiki/" + str(year) + "_United_States_presidential_election")
@@ -29,17 +29,59 @@ def parseStateTable(link):
             dataframe = pd.read_html(table)
             print(dataframe)
 
-def getUCSBData(year):
-    stateLst =  ["alaska", "alabama", "arkansas", "arizona", "california", "colorado", "connecticut", "dist. of col.", "delaware", "florida", "georgia", "hawaii", "iowa", "idaho", "illinois", "indiana", "kansas", "kentucky", "louisiana", "massachusetts", "maryland", "maine", "michigan", "minnesota", "missouri", "mississippi", "montana", "north carolina", "north dakota", "nebraska", "new hampshire", "new jersey", "new mexico", "nevada", "new york", "ohio", "oklahoma", "oregon", "pennsylvania", "rhode island", "south carolina", "south dakota", "tennessee", "texas", "utah", "virginia", "vermont", "washington", "wisconsin", "west Virginia", "wyoming"]
-    r = requests.get("https://www.presidency.ucsb.edu/statistics/elections/" + str(year))
-    soup = BeautifulSoup(r.content, "html.parser")
-    table = soup.find("table",class_ = 'table table-responsive')
-    df = pd.read_html(str(table))
-    #I'm sure there's a better way to do it without using a python list, but pandas dfs are hard to learn
-    entryLst = df[0].values.tolist()
-    for entry in entryLst:
-        #skips all entrys that aren't a state, just gotta parse it for candidate data now
-        if str(entry[0]).lower() in stateLst:
-            print(entry)
 
-getUCSBData(1824)
+def getUCSBData(year):
+
+    stateList = {"alaska": None, "alabama": None, "arkansas": None, "arizona": None, "california": None, "colorado": None,
+                 "connecticut": None, "dist. of col.": None, "delaware": None, "florida": None, "georgia": None, "hawaii": None,
+                 "iowa": None, "idaho": None, "illinois": None, "indiana": None, "kansas": None, "kentucky": None, "louisiana": None,
+                 "massachusetts": None, "maryland": None, "maine": None, "michigan": None, "minnesota": None, "missouri": None,
+                 "mississippi": None, "montana": None, "north carolina": None, "north dakota": None, "nebraska": None,
+                 "new hampshire": None, "new jersey": None, "new mexico": None, "nevada": None, "new york": None, "ohio": None,
+                 "oklahoma": None, "oregon": None, "pennsylvania": None, "rhode island": None, "south carolina": None,
+                 "south dakota": None, "tennessee": None, "texas": None, "utah": None, "virginia": None, "vermont": None,
+                 "washington": None, "wisconsin": None, "west Virginia": None, "wyoming": None}
+
+
+    df = pd.read_html("https://www.presidency.ucsb.edu/statistics/elections/" + str(year))
+    # I'm sure there's a better way to do it without using a python list, but pandas dfs are hard to learn
+    # you think he'll be upset that pandas is doing some of the scraping work?
+    entryLst = df[0].values.tolist()
+    header = []
+    candidates = []
+    for entry in entryLst:
+        # skips all entry's that aren't a state, just gotta parse it for candidate data now
+        if str(entry[0]).lower() in stateList:
+            stateList[str(entry[0]).lower()] = entry[2:]
+
+        elif str(entry[0]).lower() == "state":  # need to extract the header
+            header.append(entry[2:])
+
+    x = 0
+    while x < len(header[0]): # builds a list of candidates and their party
+        candidates.append([header[1][x], header[0][x]])
+        x += 3  # replicates each item 3X
+
+    for state in stateList:
+        newData = []
+        if stateList[state] is not None:
+            y = 0
+            newData = []
+            for candidate in candidates:
+                newData += candidate
+                while True:
+                    newData.append(stateList[state][y])
+                    y += 1
+                    if y % 3  == 0:
+                        break
+        if newData != []:
+            print(state, end=" ")
+            print(newData) # this needs to get cleaned up but holds the right data.
+
+    print("titty")
+
+
+
+
+
+getUCSBData(1836)
