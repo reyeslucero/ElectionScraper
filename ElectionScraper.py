@@ -64,6 +64,7 @@ def getUCSBData(year):
         candidates.append([header[1][x], header[0][x]])
         x += 3  # replicates each item 3X
     print(candidates)
+    infile = open("test_results.txt","w")
     for state in stateList:
         newData = []
         if stateList[state] is not None:
@@ -79,17 +80,22 @@ def getUCSBData(year):
                     if y % 3  == 0:
                         break
                 candidateLst = [year,state,candidate[0],candidate[1],candidateData[0]]
+                candidateStr = str(year)+','+state+','+candidate[0]+','+candidate[1]+','+candidateData[0]
                 #If the candidate recieved no electoral votes from the state
                 if str(candidateData[2]) == 'nan':
                     candidateLst.append("0")
+                    candidateStr += ",0"
                 else:
                     candidateLst.append(candidateData[2])
+                    candidateStr += ","+candidateData[2]
                 allCandidateData.append(candidateLst)
+                print(candidateStr,file=infile)
+
         if newData != []:
             print(state, end=" ")
             print(newData) # this needs to get cleaned up but holds the right data.
             print(allCandidateData)
-
+    infile.close()
     print("titty")
 
 
