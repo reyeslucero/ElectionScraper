@@ -46,9 +46,11 @@ def getUCSBData(year):
     df = pd.read_html("https://www.presidency.ucsb.edu/statistics/elections/" + str(year))
     # I'm sure there's a better way to do it without using a python list, but pandas dfs are hard to learn
     # you think he'll be upset that pandas is doing some of the scraping work?
+    # ^^ Who cares?
     entryLst = df[0].values.tolist()
     header = []
     candidates = []
+    allCandidateData = []
     for entry in entryLst:
         # skips all entry's that aren't a state, just gotta parse it for candidate data now
         if str(entry[0]).lower() in stateList:
@@ -61,7 +63,7 @@ def getUCSBData(year):
     while x < len(header[0]): # builds a list of candidates and their party
         candidates.append([header[1][x], header[0][x]])
         x += 3  # replicates each item 3X
-
+    print(candidates)
     for state in stateList:
         newData = []
         if stateList[state] is not None:
@@ -69,14 +71,24 @@ def getUCSBData(year):
             newData = []
             for candidate in candidates:
                 newData += candidate
+                candidateData = []
                 while True:
                     newData.append(stateList[state][y])
+                    candidateData.append(stateList[state][y])
                     y += 1
                     if y % 3  == 0:
                         break
+                candidateLst = [year,state,candidate[0],candidate[1],candidateData[0]]
+                #If the candidate recieved no electoral votes from the state
+                if str(candidateData[2]) == 'nan':
+                    candidateLst.append("0")
+                else:
+                    candidateLst.append(candidateData[2])
+                allCandidateData.append(candidateLst)
         if newData != []:
             print(state, end=" ")
             print(newData) # this needs to get cleaned up but holds the right data.
+            print(allCandidateData)
 
     print("titty")
 
@@ -84,4 +96,4 @@ def getUCSBData(year):
 
 
 
-getUCSBData(1836)
+getUCSBData(1824)
