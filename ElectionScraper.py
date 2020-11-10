@@ -77,7 +77,7 @@ def getUCSBData(year):
                 while True:
                     newData.append(stateList[state][y])
                     if type(stateList[state][y]) == float and math.isnan(stateList[state][y]):
-                        candidateData.append(0)
+                        candidateData.append("0")
                     else:
                         candidateData.append(stateList[state][y])
                     y += 1
