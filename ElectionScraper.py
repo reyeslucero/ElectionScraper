@@ -56,7 +56,7 @@ def getUCSBData(year, infile):
             header.append(entry[2:])
 
     x = 0
-    if year < 1940:
+    if year not in [1960, 1968]: # years that dont keep the party with the header. This is wrong too fuck.
         while x < len(header[0]):  # builds a list of candidates and their party
             candidate = header[1][x]
             party = header[0][x]
@@ -79,7 +79,6 @@ def getUCSBData(year, infile):
             if not badItem:
                 if [canData[i], partyData[i + 2]] not in candidates:
                     candidates.append([canData[i], partyData[i + 2]])
-
 
     for state in stateList:
         if stateList[state] is not None:
@@ -111,7 +110,7 @@ if __name__ == "__main__":
     infile = open("ElectionResults.txt", "w")
     while cur <= END_DATE:
         try:
-            getUCSBData(1960, infile)
+            getUCSBData(1944, infile)
             print("Sucessfully scraped election of: " + str(cur))
         except:
             print("Error with election of: " + str(cur))
