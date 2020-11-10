@@ -7,29 +7,6 @@ START_DATE = 1824
 END_DATE = 2016
 
 
-# def getData(year):
-#     r = requests.get("https://en.wikipedia.org/wiki/" + str(year) + "_United_States_presidential_election")
-#     soup = BeautifulSoup(r.content, "html.parser")
-#     tables = soup.findAll("table")
-#     stateResults = tables[20]
-#     links = []
-#     for link in stateResults.find_all('a'):
-#         links.append(link.get('href'))
-#     for link in links:
-#         parseStateTable(link)
-
-
-# def parseStateTable(link):
-#     if link is not None and link[:6] == "/wiki/":
-#         r = requests.get("https://en.wikipedia.org" + link)
-#         soup = BeautifulSoup(r.content, "html.parser")
-#         header = soup.find("span", {"id": "Results"})
-#         if header is not None:  # now we're in the real meat and potatoes of this
-#             table = header.find_next("table")
-#             print(table)  # prolly pandas is the next move for this
-#             dataFrame = pd.read_html(table)
-#             print(dataFrame)
-#
 
 def getUCSBData(year, infile):
 
@@ -56,10 +33,9 @@ def getUCSBData(year, infile):
 
     emptyRow = False
     while not emptyRow:
-
         name = row[3]
         electoral = row[5]
-        popular = row[8]
+        # popular = row[8]
 
         startIndex += 1
         row = entryLst[startIndex]
@@ -80,14 +56,30 @@ def getUCSBData(year, infile):
             header.append(entry[2:])
 
     x = 0
-    while x < len(header[0]):  # builds a list of candidates and their party
-        candidate = header[1][x]
-        party = header[0][x]
-        if type(candidate) == float and math.isnan(candidate):
-            break
-        candidates.append([candidate, party])
-        x += 3  # replicates each item 3X
-    print(str(year) + ": " + str(candidates))
+    if year < 1940:
+        while x < len(header[0]):  # builds a list of candidates and their party
+            candidate = header[1][x]
+            party = header[0][x]
+            if type(candidate) == float and math.isnan(candidate):
+                break
+            candidates.append([candidate, party])
+            x += 3  # replicates each item 3X
+    else:
+        canData = entryLst[startIndex + 2]
+        partyData = entryLst[startIndex + 3]
+        rightRow = False
+        for item in canData:
+            if not isNAN(item):
+                rightRow = True
+        if not rightRow:
+            canData = entryLst[startIndex]
+
+        for i in range(len(canData)):
+            badItem = (type(canData[i]) == float) and math.isnan(canData[i])
+            if not badItem:
+                if [canData[i], partyData[i + 2]] not in candidates:
+                    candidates.append([canData[i], partyData[i + 2]])
+
 
     for state in stateList:
         if stateList[state] is not None:
@@ -107,8 +99,10 @@ def getUCSBData(year, infile):
                     candidateStr = str(year)+','+state+','+candidate[0]+','+candidate[1]+','+candidateData[0]
                     candidateStr += ","+candidateData[2]
                     print(candidateStr, file=infile)
-                else:
-                    print(candidate[0])
+
+
+def isNAN(num):
+    return(type(num) == float) and math.isnan(num)
 
 
 
@@ -116,7 +110,11 @@ if __name__ == "__main__":
     cur = START_DATE
     infile = open("ElectionResults.txt", "w")
     while cur <= END_DATE:
-        getUCSBData(cur, infile)
+        try:
+            getUCSBData(1960, infile)
+            print("Sucessfully scraped election of: " + str(cur))
+        except:
+            print("Error with election of: " + str(cur))
         cur += 4
     infile.close()
 
