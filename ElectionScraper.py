@@ -7,29 +7,29 @@ START_DATE = 1824
 END_DATE = 2016
 
 
-# def getData(year):
-#     r = requests.get("https://en.wikipedia.org/wiki/" + str(year) + "_United_States_presidential_election")
-#     soup = BeautifulSoup(r.content, "html.parser")
-#     tables = soup.findAll("table")
-#     stateResults = tables[20]
-#     links = []
-#     for link in stateResults.find_all('a'):
-#         links.append(link.get('href'))
-#     for link in links:
-#         parseStateTable(link)
+def getData(year):
+    r = requests.get("https://en.wikipedia.org/wiki/" + str(year) + "_United_States_presidential_election")
+    soup = BeautifulSoup(r.content, "html.parser")
+    tables = soup.findAll("table")
+    stateResults = tables[20]
+    links = []
+    for link in stateResults.find_all('a'):
+        links.append(link.get('href'))
+    for link in links:
+        parseStateTable(link)
 
 
-# def parseStateTable(link):
-#     if link is not None and link[:6] == "/wiki/":
-#         r = requests.get("https://en.wikipedia.org" + link)
-#         soup = BeautifulSoup(r.content, "html.parser")
-#         header = soup.find("span", {"id": "Results"})
-#         if header is not None:  # now we're in the real meat and potatoes of this
-#             table = header.find_next("table")
-#             print(table)  # prolly pandas is the next move for this
-#             dataFrame = pd.read_html(table)
-#             print(dataFrame)
-#
+def parseStateTable(link):
+    if link is not None and link[:6] == "/wiki/":
+        r = requests.get("https://en.wikipedia.org" + link)
+        soup = BeautifulSoup(r.content, "html.parser")
+        header = soup.find("span", {"id": "Results"})
+        if header is not None:  # now we're in the real meat and potatoes of this
+            table = header.find_next("table")
+            print(table)  # prolly pandas is the next move for this
+            dataframe = pd.read_html(table)
+            print(dataframe)
+
 
 def getUCSBData(year):
 
@@ -49,6 +49,15 @@ def getUCSBData(year):
     # you think he'll be upset that pandas is doing some of the scraping work?
     # ^^ Who cares?
     entryLst = df[0].values.tolist()
+    startIndex = 2
+    while True:
+        row = entryLst[startIndex]
+        startIndex+=1
+        while row is not None:
+            name = row[1]
+            electoral = row[3]
+            popular = row[5]
+
     header = []
     candidates = []
     allCandidateData = []
@@ -62,21 +71,20 @@ def getUCSBData(year):
 
     x = 0
     while x < len(header[0]):  # builds a list of candidates and their party
-        candidate = header[1][x]
-        party = header[0][x]
-        if type(candidate) == float and math.isnan(candidate):
-            break
-        candidates.append([candidate, party])
+        candidates.append([header[1][x], header[0][x]])
         x += 3  # replicates each item 3X
-    print(str(year) + ": " + str(candidates))
-    infile = open("test_results.txt", "a")
+    print(candidates)
+    infile = open("test_results.txt", "w")
     for state in stateList:
+        newData = []
         if stateList[state] is not None:
             y = 0
+            newData = []
             for candidate in candidates:
+                newData += candidate
                 candidateData = []
                 while True:
-                    # newData.append(stateList[state][y])
+                    newData.append(stateList[state][y])
                     if type(stateList[state][y]) == float and math.isnan(stateList[state][y]):
                         candidateData.append("0")
                     else:
@@ -87,17 +95,26 @@ def getUCSBData(year):
                 candidateLst = [year, state, candidate[0], candidate[1], candidateData[0]]
 
                 candidateStr = str(year)+','+state+','+candidate[0]+','+candidate[1]+','+candidateData[0]
+                #If the candidate recieved no electoral votes from the state
 
-                candidateLst.append(candidateData[2])
-                candidateStr += ","+candidateData[2]
+                if type(candidateData[2]) == float and math.isnan(candidateData[2]):
+                    candidateLst.append("0")
+                    candidateStr += ",0"
+                else:
+                    candidateLst.append(candidateData[2])
+                    candidateStr += ","+candidateData[2]
                 allCandidateData.append(candidateLst)
                 print(candidateStr, file=infile)
 
+        if newData:
+            print(state, end=" ")
+            print(newData)  # this needs to get cleaned up but holds the right data.
+            print(allCandidateData)
     infile.close()
+    print("titty")
 
 
-if __name__ == "__main__":
-    cur = START_DATE
-    while cur <= END_DATE:
-        getUCSBData(cur)
-        cur += 4
+
+
+#Use 1912 for 3rd party candidates
+getUCSBData(1912)
