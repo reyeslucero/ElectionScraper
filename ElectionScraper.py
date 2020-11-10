@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import math
 
 START_DATE = 1824
 END_DATE = 2016
@@ -60,7 +61,7 @@ def getUCSBData(year):
             header.append(entry[2:])
 
     x = 0
-    while x < len(header[0]): # builds a list of candidates and their party
+    while x < len(header[0]):  # builds a list of candidates and their party
         candidates.append([header[1][x], header[0][x]])
         x += 3  # replicates each item 3X
     print(candidates)
@@ -77,23 +78,24 @@ def getUCSBData(year):
                     newData.append(stateList[state][y])
                     candidateData.append(stateList[state][y])
                     y += 1
-                    if y % 3  == 0:
+                    if y % 3 == 0:
                         break
-                candidateLst = [year,state,candidate[0],candidate[1],candidateData[0]]
+                candidateLst = [year, state, candidate[0], candidate[1], candidateData[0]]
                 candidateStr = str(year)+','+state+','+candidate[0]+','+candidate[1]+','+candidateData[0]
                 #If the candidate recieved no electoral votes from the state
-                if str(candidateData[2]) == 'nan':
+
+                if type(candidateData[2]) == float and math.isnan(candidateData[2]):
                     candidateLst.append("0")
                     candidateStr += ",0"
                 else:
                     candidateLst.append(candidateData[2])
                     candidateStr += ","+candidateData[2]
                 allCandidateData.append(candidateLst)
-                print(candidateStr,file=infile)
+                print(candidateStr, file=infile)
 
-        if newData != []:
+        if newData:
             print(state, end=" ")
-            print(newData) # this needs to get cleaned up but holds the right data.
+            print(newData)  # this needs to get cleaned up but holds the right data.
             print(allCandidateData)
     infile.close()
     print("titty")
