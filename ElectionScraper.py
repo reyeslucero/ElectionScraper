@@ -62,27 +62,34 @@ def getUCSBData(year, infile):
         if year == 2016:
             emptyRow = (type(row[2]) == float and math.isnan(row[2]))
 
-
     if year == 1976:
         entryLst = df[1].values.tolist()
     header = []
-    for entry in entryLst:
-        # skips all entry's that aren't a state, just gotta parse it for candidate data now
-        if str(entry[0]).lower() in stateList:
-            stateList[str(entry[0]).lower()] = entry[2:]
+    # for entry in entryLst:
+    #     # skips all entry's that aren't a state, just gotta parse it for candidate data now
+    #     if str(entry[0]).lower() in stateList:
+    #         stateList[str(entry[0]).lower()] = entry[2:]
+    #
+    #     elif str(entry[0]).lower() == "state":  # need to extract the header
+    #         header.append(entry[2:])
+    for i in range(len(entryLst)):
+        if str(entryLst[i][0]).lower() in stateList:
+            stateList[str(entryLst[i][0]).lower()] = entryLst[i][2:]
 
-        elif str(entry[0]).lower() == "state":  # need to extract the header
-            header.append(entry[2:])
+        elif str(entryLst[i][0]).lower() == "state":  # need to extract the header
+            # header.append(entryLst[i-1][2:])
+            header.append(entryLst[i][2:])
 
     x = 0
-    if year <= 1936:
+    if year < 1900:
         while x < len(header[0]):  # builds a list of candidates and their party
             candidate = header[1][x]
             party = header[0][x]
             if type(candidate) == float and math.isnan(candidate):
                 break
-            candidates.append([candidate, party])
-            x += 3  # replicates each item 3X
+            if [candidate, party] not in candidates:
+                candidates.append([candidate, party])
+            x += 1  # replicates each item 3X
 
     else:
         candidates = majorCandidates
@@ -115,6 +122,8 @@ def isNAN(num):
 if __name__ == "__main__":
     cur = START_DATE
     infile = open("ElectionResults.txt", "w")
+    # getUCSBData(1836, infile)
+
     while cur <= END_DATE:
         try:
             getUCSBData(cur, infile)
