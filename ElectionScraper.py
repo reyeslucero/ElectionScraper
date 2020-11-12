@@ -7,7 +7,7 @@ START_DATE = 1824
 END_DATE = 2016
 
 
-def getUCSBData(year, infile):
+def getUCSBData(year, infile, unpopularFile):
 
     stateList = {"alaska": None, "alabama": None, "arkansas": None, "arizona": None, "california": None,
                  "colorado": None, "connecticut": None, "dist. of col.": None, "delaware": None, "florida": None,
@@ -105,7 +105,10 @@ def getUCSBData(year, infile):
                         candidateData[0] = "0"
                     candidateStr = str(year)+','+state+','+candidate[0]+','+candidate[1]+','+candidateData[0]
                     candidateStr += ","+candidateData[2]
-                    print(candidateStr, file=infile)
+                    if "legislature" in candidateData[2]:
+                        print(candidateStr, file=unpopularFile)
+                    else:
+                        print(candidateStr, file=infile)
 
 
 def isNAN(num):
@@ -115,12 +118,14 @@ def isNAN(num):
 if __name__ == "__main__":
     cur = START_DATE
     infile = open("ElectionResults.txt", "w")
+    unpopularFile = open("UnpopularElectoralVotes.txt","w")
     while cur <= END_DATE:
         try:
-            getUCSBData(cur, infile)
+            getUCSBData(cur, infile,unpopularFile)
             print("Successfully scraped election of: " + str(cur))
         except:
             print("Error with election of: " + str(cur))
         cur += 4
     infile.close()
+    unpopularFile.close()
 
