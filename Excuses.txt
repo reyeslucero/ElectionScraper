@@ -1,4 +1,4 @@
 1) In 1872, there is a typo in Horace Greeley's name. We are not accounting for this and it causes him to be added even
    though he received no electoral votes.
 
-2)
+2) 2016 has some weird stuff happening, we're ignoring that.
