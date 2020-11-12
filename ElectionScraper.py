@@ -73,7 +73,7 @@ def getUCSBData(year, infile, unpopularFile):
     #     elif str(entry[0]).lower() == "state":  # need to extract the header
     #         header.append(entry[2:])
     for i in range(len(entryLst)):
-        if str(entryLst[i][0]).lower() in stateList:
+        if str(entryLst[i][0]).lower().replace('*', '') in stateList:
             stateList[str(entryLst[i][0]).lower()] = entryLst[i][2:]
 
         elif str(entryLst[i][0]).lower() == "state":  # need to extract the header
@@ -125,7 +125,7 @@ def isNAN(num):
 if __name__ == "__main__":
     cur = START_DATE
     infile = open("ElectionResults.txt", "w")
-    unpopularFile = open("UnpopularElectoralVotes.txt","w")
+    unpopularFile = open("UnpopularElectoralVotes.txt", "w")
     while cur <= END_DATE:
         try:
             getUCSBData(cur, infile,unpopularFile)
