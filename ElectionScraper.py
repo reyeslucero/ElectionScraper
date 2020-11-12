@@ -7,27 +7,28 @@ START_DATE = 1824
 END_DATE = 2016
 
 
-
 def getUCSBData(year, infile):
 
-    stateList = {"alaska": None, "alabama": None, "arkansas": None, "arizona": None, "california": None, "colorado": None,
-                 "connecticut": None, "dist. of col.": None, "delaware": None, "florida": None, "georgia": None, "hawaii": None,
-                 "iowa": None, "idaho": None, "illinois": None, "indiana": None, "kansas": None, "kentucky": None, "louisiana": None,
-                 "massachusetts": None, "maryland": None, "maine": None, "michigan": None, "minnesota": None, "missouri": None,
-                 "mississippi": None, "montana": None, "north carolina": None, "north dakota": None, "nebraska": None,
-                 "new hampshire": None, "new jersey": None, "new mexico": None, "nevada": None, "new york": None, "ohio": None,
+    stateList = {"alaska": None, "alabama": None, "arkansas": None, "arizona": None, "california": None,
+                 "colorado": None, "connecticut": None, "dist. of col.": None, "delaware": None, "florida": None,
+                 "georgia": None, "hawaii": None, "iowa": None, "idaho": None, "illinois": None, "indiana": None,
+                 "kansas": None, "kentucky": None, "louisiana": None, "massachusetts": None, "maryland": None,
+                 "maine": None, "michigan": None, "minnesota": None, "missouri": None, "mississippi": None,
+                 "montana": None, "north carolina": None, "north dakota": None, "nebraska": None, "new hampshire": None,
+                 "new jersey": None, "new mexico": None, "nevada": None, "new york": None, "ohio": None,
                  "oklahoma": None, "oregon": None, "pennsylvania": None, "rhode island": None, "south carolina": None,
-                 "south dakota": None, "tennessee": None, "texas": None, "utah": None, "virginia": None, "vermont": None,
-                 "washington": None, "wisconsin": None, "west Virginia": None, "wyoming": None}
-
+                 "south dakota": None, "tennessee": None, "texas": None, "utah": None, "virginia": None,
+                 "vermont": None, "washington": None, "wisconsin": None, "west virginia": None, "wyoming": None}
 
     df = pd.read_html("https://www.presidency.ucsb.edu/statistics/elections/" + str(year))
-    # I'm sure there's a better way to do it without using a python list, but pandas dfs are hard to learn
-    # you think he'll be upset that pandas is doing some of the scraping work?
-    # ^^ Who cares?
+
     entryLst = df[0].values.tolist()
-    startIndex = 2
+    startIndex = 3
+    if year == 1976:
+        startIndex = 2
     minorCandidates = []
+    candidates = []
+    majorCandidates = []
 
     row = entryLst[startIndex]
 
@@ -35,18 +36,36 @@ def getUCSBData(year, infile):
     while not emptyRow:
         name = row[3]
         electoral = row[5]
-        # popular = row[8]
-
-        startIndex += 1
-        row = entryLst[startIndex]
-        emptyRow = (type(row[1]) == float) and math.isnan(row[1])
+        party = row[1]
+        if year == 2016:
+            if row[0][:4] == "Last":
+                break
+            party = row[0]
+            name = row[2]
+            electoral = row[4]
 
         if electoral == '0':
             minorCandidates.append(name.upper())
+        if electoral != '0':
+            minor = False
+            for candidate in majorCandidates:
+                if candidate[1] == party:  # dont include multiples from the same party
+                    minor = True
+            if not minor:
+                majorCandidates.append([name.upper(), party])
 
+        startIndex += 1
+        if startIndex > (len(entryLst) - 1):
+            break
+        row = entryLst[startIndex]
+        emptyRow = (type(row[1]) == float and math.isnan(row[1]))
+        if year == 2016:
+            emptyRow = (type(row[2]) == float and math.isnan(row[2]))
+
+
+    if year == 1976:
+        entryLst = df[1].values.tolist()
     header = []
-    candidates = []
-    allCandidateData = []
     for entry in entryLst:
         # skips all entry's that aren't a state, just gotta parse it for candidate data now
         if str(entry[0]).lower() in stateList:
@@ -56,7 +75,7 @@ def getUCSBData(year, infile):
             header.append(entry[2:])
 
     x = 0
-    if year not in [1960, 1968]: # years that dont keep the party with the header. This is wrong too fuck.
+    if year <= 1936:
         while x < len(header[0]):  # builds a list of candidates and their party
             candidate = header[1][x]
             party = header[0][x]
@@ -64,21 +83,9 @@ def getUCSBData(year, infile):
                 break
             candidates.append([candidate, party])
             x += 3  # replicates each item 3X
-    else:
-        canData = entryLst[startIndex + 2]
-        partyData = entryLst[startIndex + 3]
-        rightRow = False
-        for item in canData:
-            if not isNAN(item):
-                rightRow = True
-        if not rightRow:
-            canData = entryLst[startIndex]
 
-        for i in range(len(canData)):
-            badItem = (type(canData[i]) == float) and math.isnan(canData[i])
-            if not badItem:
-                if [canData[i], partyData[i + 2]] not in candidates:
-                    candidates.append([canData[i], partyData[i + 2]])
+    else:
+        candidates = majorCandidates
 
     for state in stateList:
         if stateList[state] is not None:
@@ -86,7 +93,6 @@ def getUCSBData(year, infile):
             for candidate in candidates:
                 candidateData = []
                 while True:
-                    # newData.append(stateList[state][y])
                     if type(stateList[state][y]) == float and math.isnan(stateList[state][y]):
                         candidateData.append("0")
                     else:
@@ -95,6 +101,8 @@ def getUCSBData(year, infile):
                     if y % 3 == 0:
                         break
                 if candidate[0] not in minorCandidates:
+                    if candidateData[0] == "--":  # TODO verify that this is the right action in this circumstance
+                        candidateData[0] = "0"
                     candidateStr = str(year)+','+state+','+candidate[0]+','+candidate[1]+','+candidateData[0]
                     candidateStr += ","+candidateData[2]
                     print(candidateStr, file=infile)
@@ -104,14 +112,13 @@ def isNAN(num):
     return(type(num) == float) and math.isnan(num)
 
 
-
 if __name__ == "__main__":
     cur = START_DATE
     infile = open("ElectionResults.txt", "w")
     while cur <= END_DATE:
         try:
-            getUCSBData(1944, infile)
-            print("Sucessfully scraped election of: " + str(cur))
+            getUCSBData(cur, infile)
+            print("Successfully scraped election of: " + str(cur))
         except:
             print("Error with election of: " + str(cur))
         cur += 4
