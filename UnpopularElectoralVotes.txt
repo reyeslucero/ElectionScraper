@@ -1,0 +1,72 @@
+1824,delaware,ADAMS,Democratic-Republican,3 electors chosen by state legislature: 2 for Crawford; 1 for Adams,3 electors chosen by state legislature: 2 for Crawford; 1 for Adams
+1824,delaware,JACKSON,Democratic-Republican,3 electors chosen by state legislature: 2 for Crawford; 1 for Adams,3 electors chosen by state legislature: 2 for Crawford; 1 for Adams
+1824,delaware,CLAY,Democratic-Republican,3 electors chosen by state legislature: 2 for Crawford; 1 for Adams,3 electors chosen by state legislature: 2 for Crawford; 1 for Adams
+1824,delaware,CRAWFORD,Democratic-Republican,3 electors chosen by state legislature: 2 for Crawford; 1 for Adams,3 electors chosen by state legislature: 2 for Crawford; 1 for Adams
+1824,georgia,ADAMS,Democratic-Republican,9 electors chosen by state legislature and awarded to William Crawford,9 electors chosen by state legislature and awarded to William Crawford
+1824,georgia,JACKSON,Democratic-Republican,9 electors chosen by state legislature and awarded to William Crawford,9 electors chosen by state legislature and awarded to William Crawford
+1824,georgia,CLAY,Democratic-Republican,9 electors chosen by state legislature and awarded to William Crawford,9 electors chosen by state legislature and awarded to William Crawford
+1824,georgia,CRAWFORD,Democratic-Republican,9 electors chosen by state legislature and awarded to William Crawford,9 electors chosen by state legislature and awarded to William Crawford
+1824,louisiana,ADAMS,Democratic-Republican,5 electors chosen by state legislature: 3 for Jackson; 2 for Adams,5 electors chosen by state legislature: 3 for Jackson; 2 for Adams
+1824,louisiana,JACKSON,Democratic-Republican,5 electors chosen by state legislature: 3 for Jackson; 2 for Adams,5 electors chosen by state legislature: 3 for Jackson; 2 for Adams
+1824,louisiana,CLAY,Democratic-Republican,5 electors chosen by state legislature: 3 for Jackson; 2 for Adams,5 electors chosen by state legislature: 3 for Jackson; 2 for Adams
+1824,louisiana,CRAWFORD,Democratic-Republican,5 electors chosen by state legislature: 3 for Jackson; 2 for Adams,5 electors chosen by state legislature: 3 for Jackson; 2 for Adams
+1824,new york,ADAMS,Democratic-Republican,36 electors chosen by state legislature:26 to Adams; 1 to Jackson; 4 to Clay; 5 to Crawford,36 electors chosen by state legislature:26 to Adams; 1 to Jackson; 4 to Clay; 5 to Crawford
+1824,new york,JACKSON,Democratic-Republican,36 electors chosen by state legislature:26 to Adams; 1 to Jackson; 4 to Clay; 5 to Crawford,36 electors chosen by state legislature:26 to Adams; 1 to Jackson; 4 to Clay; 5 to Crawford
+1824,new york,CLAY,Democratic-Republican,36 electors chosen by state legislature:26 to Adams; 1 to Jackson; 4 to Clay; 5 to Crawford,36 electors chosen by state legislature:26 to Adams; 1 to Jackson; 4 to Clay; 5 to Crawford
+1824,new york,CRAWFORD,Democratic-Republican,36 electors chosen by state legislature:26 to Adams; 1 to Jackson; 4 to Clay; 5 to Crawford,36 electors chosen by state legislature:26 to Adams; 1 to Jackson; 4 to Clay; 5 to Crawford
+1824,south carolina,ADAMS,Democratic-Republican,11 electors chosen by state legislature and awarded to Andrew Jackson,11 electors chosen by state legislature and awarded to Andrew Jackson
+1824,south carolina,JACKSON,Democratic-Republican,11 electors chosen by state legislature and awarded to Andrew Jackson,11 electors chosen by state legislature and awarded to Andrew Jackson
+1824,south carolina,CLAY,Democratic-Republican,11 electors chosen by state legislature and awarded to Andrew Jackson,11 electors chosen by state legislature and awarded to Andrew Jackson
+1824,south carolina,CRAWFORD,Democratic-Republican,11 electors chosen by state legislature and awarded to Andrew Jackson,11 electors chosen by state legislature and awarded to Andrew Jackson
+1824,vermont,ADAMS,Democratic-Republican,7 electors chosen by state legislature and awarded to John Quincy Adams,7 electors chosen by state legislature and awarded to John Quincy Adams
+1824,vermont,JACKSON,Democratic-Republican,7 electors chosen by state legislature and awarded to John Quincy Adams,7 electors chosen by state legislature and awarded to John Quincy Adams
+1824,vermont,CLAY,Democratic-Republican,7 electors chosen by state legislature and awarded to John Quincy Adams,7 electors chosen by state legislature and awarded to John Quincy Adams
+1824,vermont,CRAWFORD,Democratic-Republican,7 electors chosen by state legislature and awarded to John Quincy Adams,7 electors chosen by state legislature and awarded to John Quincy Adams
+1828,delaware,ANDREW JACKSON,Democratic,3 electors chosen by state legislature and awarded to John Quincy Adams,3 electors chosen by state legislature and awarded to John Quincy Adams
+1828,delaware,JOHN Q. ADAMS,National-Republican,3 electors chosen by state legislature and awarded to John Quincy Adams,3 electors chosen by state legislature and awarded to John Quincy Adams
+1828,south carolina,ANDREW JACKSON,Democratic,11 electors chosen by state legislature and awarded to Andrew Jackson,11 electors chosen by state legislature and awarded to Andrew Jackson
+1828,south carolina,JOHN Q. ADAMS,National-Republican,11 electors chosen by state legislature and awarded to Andrew Jackson,11 electors chosen by state legislature and awarded to Andrew Jackson
+1832,south carolina,ANDREW JACKSON,Democratic,11 electors chosen by state legislature and awarded to John Floyd,11 electors chosen by state legislature and awarded to John Floyd
+1832,south carolina,HENRY CLAY,National-Republican,11 electors chosen by state legislature and awarded to John Floyd,11 electors chosen by state legislature and awarded to John Floyd
+1832,south carolina,WILLIAM WIRT,Anti-Masonic,11 electors chosen by state legislature and awarded to John Floyd,11 electors chosen by state legislature and awarded to John Floyd
+1836,south carolina,MARTIN VAN BUREN,Democratic,11 electors chosen by state legislature and awarded to Willie Person Mangum,11 electors chosen by state legislature and awarded to Willie Person Mangum
+1836,south carolina,WILLIAM HENRY HARRISON,Whig,11 electors chosen by state legislature and awarded to Willie Person Mangum,11 electors chosen by state legislature and awarded to Willie Person Mangum
+1836,south carolina,HUGH LAWSON WHITE,Whig,11 electors chosen by state legislature and awarded to Willie Person Mangum,11 electors chosen by state legislature and awarded to Willie Person Mangum
+1836,south carolina,DANIEL WEBSTER,Whig,11 electors chosen by state legislature and awarded to Willie Person Mangum,11 electors chosen by state legislature and awarded to Willie Person Mangum
+1840,south carolina,WILLIAM H. HARRISON,Whig,11 electors chosen by state legislature and awarded to Martin van Buren,11 electors chosen by state legislature and awarded to Martin van Buren
+1840,south carolina,MARTIN VAN BUREN,Democratic,11 electors chosen by state legislature and awarded to Martin van Buren,11 electors chosen by state legislature and awarded to Martin van Buren
+1844,south carolina,JAMES K. POLK,Democratic,9 electors chosen by state legislature and awarded to James K. Polk,9 electors chosen by state legislature and awarded to James K. Polk
+1844,south carolina,HENRY CLAY,Whig,9 electors chosen by state legislature and awarded to James K. Polk,9 electors chosen by state legislature and awarded to James K. Polk
+1848,south carolina,ZACHARY TAYLOR,Whig,9 electors chosen by state legislature and awarded to Lewis Cass,9 electors chosen by state legislature and awarded to Lewis Cass
+1848,south carolina,LEWIS CASS,Democratic,9 electors chosen by state legislature and awarded to Lewis Cass,9 electors chosen by state legislature and awarded to Lewis Cass
+1852,south carolina,FRANKLIN PIERCE,Democratic,8 electors chosen by state legislature and awarded to Franklin Pierce,8 electors chosen by state legislature and awarded to Franklin Pierce
+1852,south carolina,WINFIELD SCOTT,Whig,8 electors chosen by state legislature and awarded to Franklin Pierce,8 electors chosen by state legislature and awarded to Franklin Pierce
+1856,south carolina,JAMES BUCHANAN,Democratic,8 electors chosen by state legislature and awarded to James Buchanan,8 electors chosen by state legislature and awarded to James Buchanan
+1856,south carolina,JOHN C. FREMONT,Republican,8 electors chosen by state legislature and awarded to James Buchanan,8 electors chosen by state legislature and awarded to James Buchanan
+1856,south carolina,MILLARD FILLMORE,Whig-American,8 electors chosen by state legislature and awarded to James Buchanan,8 electors chosen by state legislature and awarded to James Buchanan
+1860,south carolina,ABRAHAM LINCOLN,Republican,8 electors chosen by state legislature and awarded to John Breckinridge,8 electors chosen by state legislature and awarded to John Breckinridge
+1860,south carolina,STEPHEN A. DOUGLAS,Democratic,8 electors chosen by state legislature and awarded to John Breckinridge,8 electors chosen by state legislature and awarded to John Breckinridge
+1860,south carolina,JOHN C. BRECKINRIDGE,Southern Democratic,8 electors chosen by state legislature and awarded to John Breckinridge,8 electors chosen by state legislature and awarded to John Breckinridge
+1860,south carolina,JOHN BELL,Constitutional Union,8 electors chosen by state legislature and awarded to John Breckinridge,8 electors chosen by state legislature and awarded to John Breckinridge
+1868,florida,ULYSSES S. GRANT,Republican,3 electors chosen by state legislature and awarded to Ulysses Grant,3 electors chosen by state legislature and awarded to Ulysses Grant
+1868,florida,HORATIO SEYMOUR,Democratic,3 electors chosen by state legislature and awarded to Ulysses Grant,3 electors chosen by state legislature and awarded to Ulysses Grant
+1876,colorado,RUTHERFORD B. HAYES,Republican,3 electors chosen by state legislature and awarded to Rutherford B. Hayes,3 electors chosen by state legislature and awarded to Rutherford B. Hayes
+1876,colorado,SAMUEL J. TILDEN,Democratic,3 electors chosen by state legislature and awarded to Rutherford B. Hayes,3 electors chosen by state legislature and awarded to Rutherford B. Hayes
+1956,alabama*,DWIGHT D. EISENHOWER,Republican,195694,0
+1956,alabama*,ADLAI STEVENSON,Democratic,280844,10*
+1960,alabama*,JOHN F. KENNEDY,Democratic,324050,5*
+1960,alabama*,RICHARD M. NIXON,Republican,237981,0
+1960,mississippi*,JOHN F. KENNEDY,Democratic,108362,*
+1960,mississippi*,RICHARD M. NIXON,Republican,73561,*
+1960,oklahoma*,JOHN F. KENNEDY,Democratic,370111,0
+1960,oklahoma*,RICHARD M. NIXON,Republican,533039,7*
+1972,virginia*,RICHARD M. NIXON,Republican,988493,11*
+1972,virginia*,GEORGE MCGOVERN,Democratic,438887,0
+1976,washington*,JIMMY CARTER,Democratic,717323,0
+1976,washington*,GERALD R. FORD,Republican,777732,8*
+1988,west virginia*,GEORGE BUSH,Republican,310065,0
+1988,west virginia*,MICHAEL DUKAKIS,Democratic,341016,5*
+2000,dist. of col.*,GEORGE W. BUSH,Republican,18073,0
+2000,dist. of col.*,ALBERT GORE, JR.,Democratic,171923,2*
+2004,minnesota*,GEORGE W. BUSH,Republican,1346695,0
+2004,minnesota*,JOHN KERRY,Democratic,1445014,9*
