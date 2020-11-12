@@ -112,7 +112,7 @@ def getUCSBData(year, infile, unpopularFile):
                         candidateData[0] = "0"
                     candidateStr = str(year)+','+state+','+candidate[0]+','+candidate[1]+','+candidateData[0]
                     candidateStr += ","+candidateData[2]
-                    if "legislature" in candidateData[2]:
+                    if "legislature" in candidateData[2] or state[-1:] == '*':
                         print(candidateStr, file=unpopularFile)
                     else:
                         print(candidateStr, file=infile)
